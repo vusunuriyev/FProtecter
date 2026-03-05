@@ -5,12 +5,15 @@
 //  Created by Vusal Nuriyev 2 on 17.05.24.
 //
 
-import SwiftUI
+import Foundation
 
 final class MarketingNetworking {
     static let shared = MarketingNetworking()
     
     func getMarketingImage(completion: @escaping (DataResponse) -> Void) {
+
+        // This will be printed before the tasks are completed
+        print("Waiting for tasks to complete...")
         let urlString = "https://api.easygetapp.com/api/market/public/marketing-ads"
         guard let url = URL(string: urlString) else { return }
 
@@ -26,7 +29,8 @@ final class MarketingNetworking {
         request.httpBody = jsonData
 
         let session = URLSession.shared
-        let dataTask = session.dataTask(with: request) { data, response, error in
+        let dataTask = session.dataTask(with: request) { [weak self] data, response, error in
+            guard let self else {return}
             if let error = error {
                 print("Error: \(error)")
             } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
@@ -57,7 +61,8 @@ final class MarketingNetworking {
         request.httpBody = jsonData
 
         let session = URLSession.shared
-        let dataTask = session.dataTask(with: request) { data, response, error in
+        let dataTask = session.dataTask(with: request) { [weak self] data, response, error in
+            guard let self else {return}
             if let error = error {
                 print("Error: \(error)")
             } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
@@ -91,7 +96,8 @@ final class MarketingNetworking {
         request.httpBody = jsonData
 
         let session = URLSession.shared
-        let dataTask = session.dataTask(with: request) { data, response, error in
+        let dataTask = session.dataTask(with: request) { [weak self] data, response, error in
+            guard let self else {return}
             if let error = error {
                 print("Error: \(error)")
             } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {

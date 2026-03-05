@@ -89,7 +89,6 @@ struct SettingsView: View {
             if marketingImageString != "" {
                 WebImage(url: URL(string: marketingImageString))
                     .resizable()
-                    .scaledToFill()
                     .frame(height: 200)
                     .cornerRadius(10)
                     .padding()
