@@ -25,32 +25,35 @@ struct DocumentsView: View {
     
     var body: some View {
         ZStack {
-            NavigationView {
-                ZStack {
-                    VStack {
-                        Color.black
-                            .frame(height: 200)
-                            .ignoresSafeArea()
-                        Spacer()
-                    }
-                    
-                    VStack {
-                        titleView
-                        adView
-                        storageView
-                        FoldersView(foldersVM: foldersVM, passwords: passwords) { folder in
-                            showStatistics = true
-                            self.folderToShowStatistics = folder
-                        }
-                    }
-                    
-                }
-            }
             
-            if showStatistics {
-                if let folderToShowStatistics = folderToShowStatistics {
-                    StatisticsView(items: folderToShowStatistics.folderItems, showStatistics: $showStatistics)
-                        .padding()
+            NavigationView {
+                ScrollView {
+                    ZStack {
+                        VStack {
+                            Color.black
+                                .frame(height: 200)
+                                .ignoresSafeArea()
+                            Spacer()
+                        }
+                        
+                        VStack {
+                            titleView
+                            adView
+                            storageView
+                            FoldersView(foldersVM: foldersVM, passwords: passwords) { folder in
+                                showStatistics = true
+                                self.folderToShowStatistics = folder
+                            }
+                        }
+                        
+                    }
+                }
+                
+                if showStatistics {
+                    if let folderToShowStatistics = folderToShowStatistics {
+                        StatisticsView(items: folderToShowStatistics.folderItems, showStatistics: $showStatistics)
+                            .padding()
+                    }
                 }
             }
         }
@@ -146,8 +149,7 @@ extension DocumentsView {
             if marketingImageString != "" {
                 WebImage(url: URL(string: marketingImageString))
                     .resizable()
-                    .scaledToFill()
-                    .frame(height: 180)
+                    .frame(height: 200)
                     .cornerRadius(10)
                     .padding()
                     .onTapGesture {

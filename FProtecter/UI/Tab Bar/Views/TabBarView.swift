@@ -25,6 +25,7 @@ struct TabBarView: View {
             .background(
                 Color.black
             )
+            .ignoresSafeArea(.keyboard)
             
             
             plusButtonView

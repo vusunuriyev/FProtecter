@@ -178,7 +178,7 @@ struct ItemsView: View {
                         showOverwriteConfirmation = true
                     } else {
                         DispatchQueue.main.async {
-                            self.foldersVM.folders[selectedFolderId].folderItems.append(newItem)
+                            foldersVM.folders[selectedFolderId].folderItems.append(newItem)
                             foldersVM.updateFolders()
                             showImagePicker = false
                         }
@@ -188,7 +188,7 @@ struct ItemsView: View {
                 if let videoURL, let videoFileName {
                     print("----- DEBUG: videoCompletion -----")
                     print(videoURL)
-                    self.addItem(from: videoURL, itemName: videoFileName)
+                    addItem(from: videoURL, itemName: videoFileName)
                 }
             }
         }
